@@ -10,3 +10,4 @@ from app.main import app
 
 # Vercel looks for the 'app' variable in this module
 __all__ = ["app"]
+
