@@ -82,6 +82,8 @@ async def get_index():
     """Serves the main application user interface."""
     template_path = Path(__file__).parent / "templates" / "index.html"
     if not template_path.exists():
+        template_path = Path.cwd() / "app" / "templates" / "index.html"
+    if not template_path.exists():
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="UI template not found."
