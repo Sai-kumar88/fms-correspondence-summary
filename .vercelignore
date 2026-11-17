@@ -1,0 +1,35 @@
+# Virtual environments (must never be uploaded)
+.venv
+.venv/
+venv/
+env/
+ENV/
+
+# Git and local environment
+.git/
+.gitignore
+.env
+.env.example
+
+# Test suite and cache
+tests/
+.pytest_cache/
+pytest.ini
+htmlcov/
+.coverage
+
+# Python byte-code cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# Logs and OS artifacts
+*.log
+logs/
+.DS_Store
+Thumbs.db
+
+# Documentation & Docker
+Dockerfile
+README.md

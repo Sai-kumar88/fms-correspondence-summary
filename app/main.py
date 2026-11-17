@@ -72,12 +72,17 @@ async def ai_service_handler(request: Request, exc: AIServiceError):
     )
 
 
-# Mount API Router
+# Mount API Router (mount at standard prefix and Vercel serverless prefix)
 app.include_router(upload_router, prefix=settings.API_PREFIX)
+app.include_router(upload_router, prefix=f"/api{settings.API_PREFIX}", include_in_schema=False)
 
 
-# Root UI Route
+# Root UI Route (mapped to both root and Vercel serverless entry aliases)
 @app.get("/", response_class=HTMLResponse, include_in_schema=False)
+@app.get("/api", response_class=HTMLResponse, include_in_schema=False)
+@app.get("/api/", response_class=HTMLResponse, include_in_schema=False)
+@app.get("/api/index", response_class=HTMLResponse, include_in_schema=False)
+@app.get("/api/index.py", response_class=HTMLResponse, include_in_schema=False)
 async def get_index():
     """Serves the main application user interface."""
     template_path = Path(__file__).parent / "templates" / "index.html"
@@ -93,6 +98,7 @@ async def get_index():
 
 # Global Health Route
 @app.get("/health", tags=["System"])
+@app.get("/api/health", tags=["System"], include_in_schema=False)
 async def root_health():
     """System health check endpoint."""
     return {
