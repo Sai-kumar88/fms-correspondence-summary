@@ -9,7 +9,7 @@ if str(ROOT_DIR) not in sys.path:
 from app.main import app
 from mangum import Mangum
 
-# Expose Mangum AWS Lambda-compatible handler for Vercel Serverless
+# Support both ASGI (app) and Serverless AWS Lambda (handler)
 handler = Mangum(app, lifespan="off")
 
 __all__ = ["app", "handler"]
