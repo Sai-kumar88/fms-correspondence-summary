@@ -270,3 +270,44 @@ Run the full pytest suite:
 ```
 
 All 19 unit and integration tests run in ~2 seconds without external dependencies.
+
+---
+
+## Deployment to Vercel & Git
+
+### 1. Push to GitHub / Git Remote
+
+Initialize and push to your GitHub repository:
+
+```bash
+# Add your remote repository URL (replace with your repo link)
+git remote add origin https://github.com/YOUR_USERNAME/FMS_SUMMARY.git
+
+# Push the main branch
+git push -u origin main
+```
+
+### 2. Deploy to Vercel
+
+#### Method A: Via GitHub (Recommended)
+1. Go to [vercel.com](https://vercel.com) and log in.
+2. Click **Add New... > Project**.
+3. Import your **`FMS_SUMMARY`** GitHub repository.
+4. In the **Environment Variables** section, add:
+   - **`NVIDIA_API_KEY`**: `your_actual_nvidia_nim_api_key`
+   - **`NVIDIA_MODEL`**: `nvidia/nemotron-3.5-lightning-30b-a3b` *(optional, has default)*
+5. Click **Deploy**. Vercel will install dependencies from `requirements.txt` and launch your serverless app.
+
+#### Method B: Via Vercel CLI
+```bash
+# Install Vercel CLI globally
+npm install -g vercel
+
+# Deploy to preview
+vercel
+
+# Deploy to production
+vercel --prod
+```
+When prompted, link your project and add `NVIDIA_API_KEY` in your Vercel Dashboard under **Settings > Environment Variables**.
+
